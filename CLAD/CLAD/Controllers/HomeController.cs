@@ -15,6 +15,11 @@ namespace CLAD.Controllers
             return View();
         }
 
+        public string Test()
+        {
+            return "Dit is een git test";
+        }
+
         public IActionResult Privacy()
         {
             return View();
