@@ -17,7 +17,7 @@ namespace CLAD.Controllers
 
         public string Test()
         {
-            return "Dit is een git test";
+            return "Dit is een git TEST";
         }
 
         public IActionResult Privacy()
