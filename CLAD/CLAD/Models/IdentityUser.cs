@@ -7,5 +7,6 @@ namespace CLAD.Models
 {
     public class IdentityUser
     {
+        
     }
 }

@@ -7,5 +7,7 @@ namespace CLAD.Models
 {
     public class Consultant
     {
+        public string Description { get; set; }
+        public string DisplayName { get; set; }
     }
 }
