@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace CLAD.Models
 {
-    public class Consultant
+    public class Consultant 
     {
+        public int Id { get; set; }
         public string Description { get; set; }
         public string DisplayName { get; set; }
     }

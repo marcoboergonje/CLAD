@@ -10,7 +10,7 @@ namespace CLAD.Models
         public int ArticleId { get; set; }
         public string AuthorId { get; set; }
         public string Content { get; set; }
-        public int id { get; set; }
+        public int Id { get; set; }
         public DateTime PublicationDate { get; set; }
     }
 }
