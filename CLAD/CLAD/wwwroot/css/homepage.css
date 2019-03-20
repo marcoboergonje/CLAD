@@ -31,4 +31,9 @@ body{
 .ontmoet-content {
     font-size: 20px;
 }
+.consultantprofile {
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
 
