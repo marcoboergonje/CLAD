@@ -38,12 +38,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="messages" asp-action="Create">stel een vraag</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Consultants" asp-action="Index">Consultants</a>
+                        </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="messages" asp-action="Index">Alle vragen</a>
                             </li>
                         }
+                    </ul>
                 </div>
             </div>
         </nav>
