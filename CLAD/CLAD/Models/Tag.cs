@@ -7,7 +7,7 @@ namespace CLAD.Models
 {
     public class Tag
     {
-        public List<ArticleTag> articleTags { get; set; }
+        public List<ArticleTag> Articles { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
     }

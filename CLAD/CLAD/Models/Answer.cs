@@ -7,7 +7,8 @@ namespace CLAD.Models
 {
     public class Answer
     {
-        public int id { get; set; }
+        public int Id { get; set; }
+        public Question Question { get; set; }
         public string AuthorId { get; set; }
         public string Content { get; set; }
         public DateTime PublicationDate { get; set; }
