@@ -1,0 +1,52 @@
+﻿@model CLAD.Models.Message
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Beantwoorden</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="StuurEmail">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Content" class="control-label">Gestelde vraag</label>
+                <input asp-for="Content" disabled class="form-control" />
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Naam</label>
+                <input asp-for="Name" disabled class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Answer" class="control-label">Antwoord</label>
+                <input asp-for="Answer" class="form-control" />
+                <span asp-validation-for="Answer" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Verzend email" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
