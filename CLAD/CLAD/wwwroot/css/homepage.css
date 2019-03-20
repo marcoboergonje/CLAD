@@ -7,10 +7,28 @@ body{
     
 }
 
-header-img{
+.header-nav {
+    height: 50vh;
+    background-image: url(../img/team_c.jpg);
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+    background-size: cover;
+}
+
+.header-img{
     width: 100%;
 }
 
-banner {
-    width: 100%;
+.homepage-title {
+    background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
+
+.wzw-content{
+    font-size: 20px;
+}
+
+.ontmoet-content {
+    font-size: 20px;
+}
+
