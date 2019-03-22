@@ -12,18 +12,19 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label">Beschrijving</label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="DisplayName" class="control-label">Naam</label>
                 <input asp-for="DisplayName" class="form-control" />
                 <span asp-validation-for="DisplayName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImgName" class="control-label">Fotonaam (met bestandstype)</label>
-                <input asp-for="ImgName" value="undefined.jpg" class="form-control" />
+                <label asp-for="Description" class="control-label">Beschrijving</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImgName" class="control-label">Foto</label>
+                <br />
+                <input type="file" asp-for="ImgName" value="undefined.jpg">
                 <span asp-validation-for="ImgName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -34,7 +35,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Terug naar overzicht</a>
+    <a asp-action="Index" class="btn btn-outline-primary">Terug naar overzicht</a>
 </div>
 
 @section Scripts {

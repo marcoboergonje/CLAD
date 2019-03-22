@@ -3,31 +3,39 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<h3>Weet je zeker dat je deze constulantpagina wilt verwijderen?</h3>
+<h4>Deze actie kan niet meer teruggedraaid worden</h4>
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Consultant</h4>
-    <hr />
+<div class="alert alert-danger" role="alert">
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+        <dt class="col-sm-2">
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
+        <dd class="col-sm-10">
+            <img src="~/img/@Html.DisplayFor(model => model.ImgName)" style="width:100px;height:100px;border-radius:50%;">
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DisplayName)
+        <dt class="col-sm-2">
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DisplayName)
+        <dd class="col-sm-10">
+            <h1>@Html.DisplayFor(model => model.DisplayName)</h1>
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+            Beschrijving
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        </dl>
+    </div>
 </div>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Delete" class="btn btn-outline-danger" />
+    <br />
+    <br />
+    <a asp-action="Index" class="btn btn-outline-primary">Back to List</a>
+</form>

@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ImgName" class="control-label">Fotonaam met bestandstype</label>
-                <input asp-for="ImgName" class="form-control" />
+                <input type="file" asp-for="ImgName" value="undefined.jpg" class="fileupload">
                 <span asp-validation-for="ImgName" class="text-danger"></span>
             </div>
             <div class="form-group">

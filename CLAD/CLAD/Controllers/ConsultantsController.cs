@@ -55,11 +55,24 @@ namespace CLAD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Description,DisplayName,ImgName")] Consultant consultant)
         {
+            if (consultant.ImgName == "")
+            {
+                consultant.ImgName = "undefined.jpg";
+                if (ModelState.IsValid)
+                {
+                    _context.Add(consultant);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(consultant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
             }
             return View(consultant);
         }
