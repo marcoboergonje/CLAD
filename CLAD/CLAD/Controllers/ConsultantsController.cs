@@ -53,13 +53,26 @@ namespace CLAD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,DisplayName")] Consultant consultant)
+        public async Task<IActionResult> Create([Bind("Id,Description,DisplayName,ImgName")] Consultant consultant)
         {
+            if (consultant.ImgName == "")
+            {
+                consultant.ImgName = "undefined.jpg";
+                if (ModelState.IsValid)
+                {
+                    _context.Add(consultant);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(consultant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
             }
             return View(consultant);
         }
@@ -85,7 +98,7 @@ namespace CLAD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,DisplayName")] Consultant consultant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,DisplayName,ImgName")] Consultant consultant)
         {
             if (id != consultant.Id)
             {
