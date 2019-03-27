@@ -24,9 +24,8 @@
 
 </head>
 <body>
-    <header class="header-nav">
-       <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
+        <header class="header-nav">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CLAD</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -36,10 +35,13 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="messages" asp-action="Create">Stel een vraag</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Messages" asp-action="Create">Stel een vraag</a>
                         </li>
-s                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Consultants" asp-action="Index">Consultants</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Consultants" asp-action="Table">Consultants</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="Index">Artikelen</a>
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
@@ -49,13 +51,12 @@ s                        <li class="nav-item">
                         }
                     </ul>
                 </div>
-            </div>
-        </nav>
-        <!--<div class="header-img">
+            </nav>
+            <!--<div class="header-img">
             <img class="banner" src="~/img/team_c.jpg" alt="header" />
         </div>-->
-    </header>
-    <div class="container">
+        </header>
+    <div class="container-fluid">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @RenderBody()

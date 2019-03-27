@@ -54,32 +54,6 @@ body {
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
 }
-
-/*CONSULTANT PAGE*/
-.btn-white-round {
-    background-color: white;
-    color: black;
-    border-radius: 25px;
-    padding: 15px;
-    padding-left: 30px;
-    padding-right: 30px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.btn-white-round:hover {
-    background-color: #f2f2f2;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    color: black;
-    text-decoration: none;  
-}
-div.card {
-    width: 250px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    text-align: center;
-}
-
-
-
 /* UPLOAD BUTTON */
 
 .upload-btn-wrapper {
@@ -111,3 +85,63 @@ div.card {
     top: 0;
     opacity: 0;
 }
+
+
+/* CONSULTANT PAGE */
+
+.imgconsultant {
+    width: 200px !important;
+    height: 200px !important;
+    border-radius: 50%;
+    margin-bottom: 25%;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.imgconsultant:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.card-img-top {
+    width: 250px;
+    height: 250px;
+}
+.descriptipon {
+    margin-bottom: 200px;
+    margin-top: -200px;
+    display: inline;
+    width: 80%;
+}
+.card-container {
+    width: 18rem;
+    margin-left: 2%;
+    margin-top: -10%;
+    float: left;
+}
+
+.btn-white-round {
+    font-size: 20px;
+    text-align: center;
+    background-color: white;
+    color: black;
+    border-radius: 25px;
+    position: absolute;
+    width: 250px;
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn-white-round:hover {
+    background-color: #f2f2f2;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: black;
+    text-decoration: none;  
+}
+div.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    margin-bottom: 10%;
+    width: 250px;
+} 
+

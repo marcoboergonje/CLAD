@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using CLAD.Models;
 
 namespace CLAD.Models
 {
@@ -14,5 +15,7 @@ namespace CLAD.Models
         }
 
         public DbSet<CLAD.Models.Consultant> Consultant { get; set; }
+
+        public DbSet<CLAD.Models.Article> Article { get; set; }
     }
 }

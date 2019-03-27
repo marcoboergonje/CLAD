@@ -3,26 +3,25 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="~/img/@Html.DisplayFor(model => model.ImgName)" alt="Card image cap">
-    <div class="card-body">
-        <h2 class="card-title">@Html.DisplayFor(model => model.DisplayName)</h2>
-        <br />
+<div class="container-fluid">
+    <div class="card-container">
+        <div class="card" style="height:350px;">
+            <img class="card-img-top" src="~/img/@Html.DisplayFor(model => model.ImgName)" alt="Card image cap">
+            <div class="card-body">
+                <h2 class="card-title">@Html.DisplayFor(model => model.DisplayName)</h2>
+                <br />
+            </div>
+        </div>
         <a href="#" class="btn-white-round">Artikelen</a>
     </div>
-</div>
-<div>
-    <hr />
-    <dl class="row">
-        <dd class="col-sm-12" style="font-size:20px;">
+    <div class="container">
+        <div class="description container-fluid">
             @Html.DisplayFor(model => model.Description)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary">Edit</a> 
-    <br />
-    <br />
-    <a asp-action="Index" class="btn btn-outline-primary">Terug naar overzicht</a>
+        </div>
+        <div>
+            <br />
+            <br />
+            <a asp-action="Index" class="btn btn-outline-primary">Terug naar overzicht</a>
+        </div>
+    </div>
 </div>

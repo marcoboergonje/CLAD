@@ -1,21 +1,22 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<link rel="stylesheet" href="~/css/homepage.css" />
-<div class="text-center">
-    <h1 class="homepage-title">Welkom bij CeeLearnAndDo</h1>
-</div>
-<div class="home-content">
-    <div class="over-ons-content">
-        <h3 class="wzw-content">Wie zijn wij?</h3>
-        <p></p>
-        <h3 class="ontmoet-content">Ontmoet het team van CeeLearnAndDo</h3>
-        <p></p>
+<div class="container">
+    <link rel="stylesheet" href="~/css/homepage.css" />
+    <div class="text-center">
+        <h1 class="homepage-title">Welkom bij CeeLearnAndDo</h1>
     </div>
-    <div class="img-over-ons">
+    <div class="home-content">
+        <div class="over-ons-content">
+            <h3 class="wzw-content">Wie zijn wij?</h3>
+            <p></p>
+            <a class="ontmoet-content" asp-area="" asp-controller="Consultants" asp-action="Index"><h3>Ontmoet het team van CeeLearnAndDo</h3></a>
+            <p></p>
+        </div>
+        <div class="img-over-ons">
 
+        </div>
     </div>
 </div>
-
 
 
