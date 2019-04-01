@@ -6,18 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CLAD.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace CLAD.Controllers
 {
     public class ArticlesController : Controller
     {
         private readonly CLADContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public ArticlesController(CLADContext context)
+
+        public ArticlesController(CLADContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
+        [Authorize]
         // GET: Articles
         public async Task<IActionResult> Index()
         {
@@ -55,6 +61,7 @@ namespace CLAD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,AuthorId,Content,IsVisible,Title,PublicaionDate")] Article article)
         {
+            //article.AuthorId = await _userManager.GetUserAsync(HttpContext.User);
             if (ModelState.IsValid)
             {
                 _context.Add(article);

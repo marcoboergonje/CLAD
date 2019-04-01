@@ -14,6 +14,6 @@ namespace CLAD.Models
         public string Title { get; set; }
         public List<ArticleTag> Tags { get; set; }
         public List<ArticleComment> Comments { get; set; }
-        public DateTime PublicaionDate { get; set; }
+        public DateTime PublicationDate { get; set; }
     }
 }
