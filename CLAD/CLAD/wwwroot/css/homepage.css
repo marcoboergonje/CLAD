@@ -6,26 +6,91 @@
 .header-nav {
     height: 50vh;
     background-image: url(../img/team_c.jpg);
+    background-size: cover;
     clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
     background-size: cover;
 }
 
-.header-img{
-    width: 100%;
+.section-about {
+    padding: 25rem 0;
+    padding-bottom: 30vh;
+    margin-top: -55vh;
 }
 
-.homepage-title {
+.center-text{
+  text-align: center;
+}
+
+.heading-secundiary{
+    margin-top: 3.5rem;
+    margin-bottom: 5rem;
+    letter-spacing: 0.1rem;
+    font-weight: 700;
     background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.wzw-content{
-    font-size: 20px;
+.heading-tertiary{
+    font-weight: 700;
+    font-size: 1.2rem;
 }
 
-.ontmoet-content {
-    font-size: 20px;
+.text-about{
+    width: 90%;
+}
+
+.heading-tertiary-margin{
+    margin-bottom: 1rem;
+}
+
+.compositie {
+    position: relative;
+}
+
+.compositie-foto {
+    width: 280px;
+    height: 170px;
+    box-shadow: 0 14px 18px 0 rgba(0, 0, 0, 0.2), 0 16px 30px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 2px;
+    position: absolute;
+    z-index: 10;
+    transition: all .2s; 
+}
+
+.compositie-foto:hover{
+    transform: scale(1.25);
+    z-index: 20;
+}
+
+.compositie-foto-1{
+    left: 40%;
+    top: 0.5rem;
+}
+
+.compositie-foto-2 {
+    left: 0;
+    top: 2.5rem;
+
+}
+
+.compositie-foto-3 {
+    left: 20%;
+    top: 10.5rem;
+}
+
+.section-recent-article{
+
+}
+
+.recent-block{
+    background-color: #f7f7f7;
+    height: 225px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    border-radius: 1px;
 }
 .consultantprofile {
     border-radius: 50%;
@@ -33,3 +98,9 @@
     width: 200px;
 }
 
+.profile-pic{
+    width: 25%;
+    height: 225px;  
+    background-color: #f7f7f7;
+    border-right: 2px solid black;
+}

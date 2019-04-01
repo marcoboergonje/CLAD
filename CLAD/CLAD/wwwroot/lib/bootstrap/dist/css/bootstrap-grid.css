@@ -19,6 +19,12 @@ html {
   box-sizing: inherit;
 }
 
+.container-homepage {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
 .container {
   width: 100%;
   padding-right: 15px;
