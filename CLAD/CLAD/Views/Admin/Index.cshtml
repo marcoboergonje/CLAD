@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CLAD.Models.Consultant>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Consultant overzicht</h1>
+
+<p>
+</p>
+<table class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Beschrijving
+            </th>
+            <th>
+                Naam
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="max-width:600px;">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisplayName)
+                </td>
+                <td style="text-align:center">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Bewerken</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">Consultant</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Verwijderen</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Create" class="btn btn-outline-primary">Consultant toevoegen</a>
+
