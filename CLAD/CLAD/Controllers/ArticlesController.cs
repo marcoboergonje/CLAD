@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using CLAD.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace CLAD.Controllers
 {
+    [Authorize]
     public class ArticlesController : Controller
     {
         private readonly CLADContext _context;
@@ -62,6 +64,15 @@ namespace CLAD.Controllers
         public async Task<IActionResult> Create([Bind("Id,AuthorId,Content,IsVisible,Title,PublicaionDate")] Article article)
         {
             //article.AuthorId = await _userManager.GetUserAsync(HttpContext.User);
+            article.IsVisible = false;
+            article.PublicationDate = DateTime.Now;
+            //article.AuthorId = await _userManager.GetUserAsync(HttpContext.User);
+
+            Console.WriteLine("USER : " + await _userManager.GetUserAsync(HttpContext.User));
+
+            var test = await _userManager.GetUserAsync(HttpContext.User);
+            article.AuthorId = test.UserName;
+
             if (ModelState.IsValid)
             {
                 _context.Add(article);
