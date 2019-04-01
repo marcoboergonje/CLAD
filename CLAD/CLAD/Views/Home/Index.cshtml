@@ -1,22 +1,78 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div class="container">
-    <link rel="stylesheet" href="~/css/homepage.css" />
-    <div class="text-center">
-        <h1 class="homepage-title">Welkom bij CeeLearnAndDo</h1>
-    </div>
-    <div class="home-content">
-        <div class="over-ons-content">
-            <h3 class="wzw-content">Wie zijn wij?</h3>
-            <p></p>
-            <a class="ontmoet-content" asp-area="" asp-controller="Consultants" asp-action="Index"><h3>Ontmoet het team van CeeLearnAndDo</h3></a>
-            <p></p>
+<link rel="stylesheet" href="~/css/homepage.css" />
+<main>
+    <section class="section-about">
+        <div class="center-text">
+            <h2 class="heading-secundiary">
+                Welkom bij CeeLearnAndDo
+            </h2>
         </div>
-        <div class="img-over-ons">
+        <div class="row">
+            <div class="col-6">
+                <h3 class="heading-tertiary heading-tertiary-margin">
+                    Wie zijn wij
+                </h3>
+                <p class="text-about">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                </p>
+                <h3 class="heading-tertiary heading-tertiary-margin">
+                    Ontmoet het team van CeeLearnAndDo
+                </h3>
+                <p class="text-about">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
 
+            </div>
+            <div class="col-6">
+                <div class="compositie">
+                    <img src="~/img/team-b.jpg" class="compositie-foto compositie-foto-1" alt="" />
+                    <img src="~/img/gebouw-3.jpg" class="compositie-foto compositie-foto-2" alt="" />
+                    <img src="~/img/team-a.jpg" class="compositie-foto compositie-foto-3" alt="" />
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </section>
+    <section class="section-recent-article">
+        <div class="center-text">
+            <h2 class="heading-secundiary"> Recent geplaatste artiklen</h2>
+        </div>
+        <div class="recent-block reveal-onscroll-recentarticle">
+            <div class="profile-pic">
+                
+            </div>
+            <div class="test">
+                <h3 class="heading-tertiary center-text"></h3>
+                <p class="nav-block-text">
+
+                </p>
+            </div>
+        </div>
+        <div class="recent-block">
+            <div class="profile-pic">
+
+            </div>
+            <div class="test">
+                <h3 class="heading-tertiary center-text"></h3>
+                <p class="nav-block-text">
+
+                </p>
+            </div>
+        </div>
+        <div class="recent-block">
+            <div class="profile-pic">
+
+            </div>
+            <div class="test">
+                <h3 class="heading-tertiary center-text"></h3>
+                <p class="nav-block-text">
+                </p>
+            </div>
+        </div>
+    </section>
+</main>
+
+
 
 
