@@ -1,4 +1,4 @@
-﻿*{
+﻿    *{
     padding: 0;
     margin: 0;
 }
@@ -92,6 +92,7 @@
     margin-bottom: 50px;
     border-radius: 1px;
 }
+
 .consultantprofile {
     border-radius: 50%;
     height: 200px;
