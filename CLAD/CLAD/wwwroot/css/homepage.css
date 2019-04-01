@@ -92,6 +92,11 @@
     margin-bottom: 50px;
     border-radius: 1px;
 }
+.consultantprofile {
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
 
 .profile-pic{
     width: 25%;

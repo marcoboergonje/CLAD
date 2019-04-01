@@ -1,0 +1,27 @@
+﻿@model CLAD.Models.Consultant
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="container-fluid">
+    <div class="card-container">
+        <div class="card" style="height:350px;">
+            <img class="card-img-top" src="~/img/@Html.DisplayFor(model => model.ImgName)" alt="Card image cap">
+            <div class="card-body">
+                <h2 class="card-title">@Html.DisplayFor(model => model.DisplayName)</h2>
+                <br />
+            </div>
+        </div>
+        <a href="#" class="btn-white-round">Artikelen</a>
+    </div>
+    <div class="container">
+        <div class="description container-fluid">
+            @Html.DisplayFor(model => model.Description)
+        </div>
+        <div>
+            <br />
+            <br />
+            <a asp-action="Index" class="btn btn-outline-primary">Terug naar overzicht</a>
+        </div>
+    </div>
+</div>
