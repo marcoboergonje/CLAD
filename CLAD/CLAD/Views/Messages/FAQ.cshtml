@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CLAD.Models.Message>
+
+@{
+    ViewData["Title"] = "Vragen";
+}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<div class="container">
+    <h1 style="margin-bottom:5%;">Frequently asked questions</h1>
+    <table id="jquerytable " class="table table-striped">
+        <tbody>
+            @foreach (var item in Model)
+            {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Content)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td>
+                                <p style="visibility:hidden;">@Html.DisplayFor(modelItem => item.Date)</p>
+                            </td>
+
+                           
+                        </tr>
+            }
+        </tbody>
+    </table>
+
+  
+</div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("Demo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+</div>

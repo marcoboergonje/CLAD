@@ -5,34 +5,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using CLAD.Data;
 using CLAD.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
 
 namespace CLAD.Controllers
 {
-    [Authorize(Policy = "RequireAdministratorRole")]
-    public class ArticlesController : Controller
+    public class ImgsController : Controller
     {
-        private readonly CLADContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly ApplicationDbContext _context;
 
-
-        public ArticlesController(CLADContext context, UserManager<IdentityUser> userManager)
+        public ImgsController(ApplicationDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
-        [Authorize]
-        // GET: Articles
+        // GET: Imgs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Article.ToListAsync());
+            return View(await _context.Img.ToListAsync());
         }
 
-        // GET: Articles/Details/5
+        // GET: Imgs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -40,54 +33,39 @@ namespace CLAD.Controllers
                 return NotFound();
             }
 
-            var article = await _context.Article
+            var img = await _context.Img
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (article == null)
+            if (img == null)
             {
                 return NotFound();
             }
 
-            return View(article);
+            return View(img);
         }
 
-        [Authorize]
-        // GET: Articles/Create
+        // GET: Imgs/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        [Authorize]
-        // POST: Articles/Create
+        // POST: Imgs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AuthorId,Content,IsVisible,Title,PublicaionDate")] Article article)
+        public async Task<IActionResult> Create([Bind("Id,ImgName")] Img img)
         {
-            article
-            article.IsVisible = false;
-            //article.AuthorId = await _userManager.GetUserAsync(HttpContext.User);
-            article.IsVisible = false;
-            article.PublicationDate = DateTime.Now;
-            //article.AuthorId = await _userManager.GetUserAsync(HttpContext.User);
-
-            Console.WriteLine("USER : " + await _userManager.GetUserAsync(HttpContext.User));
-
-            var test = await _userManager.GetUserAsync(HttpContext.User);
-            article.AuthorId = test.UserName;
-
             if (ModelState.IsValid)
             {
-                _context.Add(article);
+                _context.Add(img);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(article);
+            return View(img);
         }
 
-        [Authorize]
-        // GET: Articles/Edit/5
+        // GET: Imgs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,25 +73,22 @@ namespace CLAD.Controllers
                 return NotFound();
             }
 
-            var article = await _context.Article.FindAsync(id);
-            if (article == null)
+            var img = await _context.Img.FindAsync(id);
+            if (img == null)
             {
                 return NotFound();
             }
-            return View(article);
+            return View(img);
         }
 
-
-        [Authorize]
-        // POST: Articles/Edit/5
+        // POST: Imgs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AuthorId,Content,IsVisible,Title,PublicationDate")] Article article)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ImgName")] Img img)
         {
-            article.PublicationDate = DateTime.Now;
-            if (id != article.Id)
+            if (id != img.Id)
             {
                 return NotFound();
             }
@@ -122,12 +97,12 @@ namespace CLAD.Controllers
             {
                 try
                 {
-                    _context.Update(article);
+                    _context.Update(img);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ArticleExists(article.Id))
+                    if (!ImgExists(img.Id))
                     {
                         return NotFound();
                     }
@@ -138,11 +113,10 @@ namespace CLAD.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(article);
+            return View(img);
         }
 
-        [Authorize]
-        // GET: Articles/Delete/5
+        // GET: Imgs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -150,31 +124,30 @@ namespace CLAD.Controllers
                 return NotFound();
             }
 
-            var article = await _context.Article
+            var img = await _context.Img
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (article == null)
+            if (img == null)
             {
                 return NotFound();
             }
 
-            return View(article);
+            return View(img);
         }
 
-        [Authorize]
-        // POST: Articles/Delete/5
+        // POST: Imgs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var article = await _context.Article.FindAsync(id);
-            _context.Article.Remove(article);
+            var img = await _context.Img.FindAsync(id);
+            _context.Img.Remove(img);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ArticleExists(int id)
+        private bool ImgExists(int id)
         {
-            return _context.Article.Any(e => e.Id == id);
+            return _context.Img.Any(e => e.Id == id);
         }
     }
 }
