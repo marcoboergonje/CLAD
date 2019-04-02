@@ -33,6 +33,11 @@ namespace CLAD.Controllers
             }
         }
 
+        public async Task<IActionResult> FAQ()
+        {
+             return View(await _context.Message.ToListAsync());
+        }
+
         // GET: Messages/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -129,7 +134,6 @@ namespace CLAD.Controllers
                 client.Send(msg);
             return View("Succes");
         }
-
 
         // POST: Messages/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

@@ -10,7 +10,7 @@ a.navbar-brand {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 16px;
 }
 @media (min-width: 768px) {
   html {
@@ -19,7 +19,8 @@ html {
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+  border-top: 2px solid #e5e5e5;
+  padding-bottom: 20px;
 }
 .border-bottom {
   border-bottom: 1px solid #e5e5e5;
@@ -43,16 +44,16 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+
 }
 .footer {
-  position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
+  background-color: #f7f7f7;
   /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+  height: 100px;
+  line-height: 100px; /* Vertically center the text there */
 }
 /* UPLOAD BUTTON */
 
@@ -97,6 +98,14 @@ body {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.imgconsultantindex {
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 50%;
+    margin-bottom: 25%;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .imgconsultant:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
 
@@ -106,10 +115,7 @@ body {
     height: 250px;
 }
 .descriptipon {
-    margin-bottom: 200px;
-    margin-top: -200px;
     display: inline;
-    width: 80%;
 }
 .card-container {
     width: 18rem;
@@ -126,7 +132,7 @@ body {
     border-radius: 25px;
     position: absolute;
     width: 250px;
-    padding: 15px;
+    padding: 5px;
     padding-left: 30px;
     padding-right: 30px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -143,5 +149,43 @@ div.card {
     text-align: center;
     margin-bottom: 10%;
     width: 250px;
-} 
+}
 
+/* DROPDOWN FOR NAV */
+
+.dropbtn {
+    margin-top: 9px;
+    margin-right: 15px;
+    margin-left: 15px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;  
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+}

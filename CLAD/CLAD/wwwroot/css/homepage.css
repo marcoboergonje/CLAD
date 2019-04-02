@@ -105,3 +105,11 @@
     background-color: #f7f7f7;
     border-right: 2px solid black;
 }
+
+.li-footer {
+    height: 20px;
+    list-style-type: none;
+    display: inline;
+    padding-right: 1%;
+    float: left;
+}
