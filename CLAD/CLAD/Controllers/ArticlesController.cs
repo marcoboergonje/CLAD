@@ -12,7 +12,7 @@ using System.Security.Claims;
 
 namespace CLAD.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class ArticlesController : Controller
     {
         private readonly CLADContext _context;
@@ -103,8 +103,9 @@ namespace CLAD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AuthorId,Content,IsVisible,Title,PublicaionDate")] Article article)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,AuthorId,Content,IsVisible,Title,PublicationDate")] Article article)
         {
+            article.PublicationDate = DateTime.Now;
             if (id != article.Id)
             {
                 return NotFound();

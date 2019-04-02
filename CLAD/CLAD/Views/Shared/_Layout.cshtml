@@ -87,11 +87,21 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+        <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - CLAD - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <img src="~/img/Logo.png" alt="Alternate Text" />
+            &copy; 2019 - CLAD -
+            <ul>
+                <li class="li-footer"><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+                <li class="li-footer"><a asp-area="" asp-controller="Home" asp-action="Privacy">Consultants</a></li>
+                <li class="li-footer"><a asp-area="" asp-controller="Home" asp-action="Privacy">Artikelen</a></li>
+                <li class="li-footer"><a asp-area="" asp-controller="Home" asp-action="Privacy">FAQ</a></li>
+            </ul>
+
         </div>
     </footer>
+
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
