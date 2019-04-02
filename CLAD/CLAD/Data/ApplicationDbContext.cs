@@ -14,5 +14,6 @@ namespace CLAD.Data
         {
         }
         public DbSet<CLAD.Models.Message> Message { get; set; }
+        public DbSet<CLAD.Models.Img> Img { get; set; }
     }
 }
