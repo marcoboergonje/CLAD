@@ -3,41 +3,41 @@
 @{
     ViewData["Title"] = "Create";
 }
+<div class="container">
+    <h1>Consultant toevoegen</h1>
 
-<h1>Consultant toevoegen</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="DisplayName" class="control-label">Naam</label>
+                    <input asp-for="DisplayName" class="form-control" />
+                    <span asp-validation-for="DisplayName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Beschrijving</label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ImgName" class="control-label">Foto</label>
+                    <br />
+                    <input type="file" asp-for="ImgName" value="undefined.jpg">
+                    <span asp-validation-for="ImgName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Toevoegen" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="DisplayName" class="control-label">Naam</label>
-                <input asp-for="DisplayName" class="form-control" />
-                <span asp-validation-for="DisplayName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label">Beschrijving</label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImgName" class="control-label">Foto</label>
-                <br />
-                <input type="file" asp-for="ImgName" value="undefined.jpg">
-                <span asp-validation-for="ImgName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Toevoegen" class="btn btn-primary" />
-            </div>
-        </form>
+    <div>
+        <a asp-action="Index" class="btn btn-outline-primary">Terug naar overzicht</a>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index" class="btn btn-outline-primary">Terug naar overzicht</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

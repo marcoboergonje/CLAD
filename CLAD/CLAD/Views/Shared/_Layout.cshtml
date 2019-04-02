@@ -21,41 +21,65 @@
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/homepage.css" />
-
+    <!--DIT IS DE ICON STYLESHEET/////////////////////////////////////////////////////////////////////////////////-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 </head>
 <body>
-        <header class="header-nav">
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CLAD</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+    <header class="header-nav">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CLAD</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <partial name="_LoginPartial" />
+
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                    </li>
+                    <div class="dropdown">
+                        <button class="dropbtn">Vragen                            <i class="fa fa-angle-double-down"></i></button>
+                        <div class="dropdown-content">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Messages" asp-action="Create">Stel een vraag</a>
-                        </li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Messages" asp-action="FAQ">FAQ</a>
+
+
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropbtn">Consultants                            <i class="fa fa-angle-double-down"></i></button>
+                        <div class="dropdown-content">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Consultants" asp-action="Index">Consultant overzicht</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Consultants" asp-action="Table">Index</a>
+
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropbtn">Artikelen                            <i class="fa fa-angle-double-down"></i></button>
+                        <div class="dropdown-content">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="Create">Artikel aanmaken</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="Index">Index</a>
+
+                        </div>
+                    </div>
+                    <li class="nav-item">
+                    </li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Consultants" asp-action="Table">Consultants</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="messages" asp-action="Index">Alle vragen</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="Create">Artikelen</a>
-                        </li>
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="messages" asp-action="Index">Alle vragen</a>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </nav>
-            <!--<div class="header-img">
+                    }
+                </ul>
+            </div>
+        </nav>
+
+        <!--<div class="header-img">
             <img class="banner" src="~/img/team_c.jpg" alt="header" />
         </div>-->
-        </header>
+    </header>
     <div class="container-fluid">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
@@ -88,6 +112,9 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
