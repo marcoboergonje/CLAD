@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CLAD.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 using System.IO;
 
 namespace CLAD.Controllers
@@ -14,10 +15,12 @@ namespace CLAD.Controllers
     public class ConsultantsController : Controller
     {
         private readonly CLADContext _context;
+        private readonly IHostingEnvironment _env;
 
-        public ConsultantsController(CLADContext context)
+        public ConsultantsController(CLADContext context, IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: Consultants
@@ -55,33 +58,13 @@ namespace CLAD.Controllers
             return View();
         }
 
-
-        public IActionResult Upload()
-        {
-            return View();
-        }
-
- 
-
-
         // POST: Consultants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,DisplayName,ImgName")] Consultant consultant)
+        public async Task<IActionResult> Create([Bind("Id,Description,DisplayName,ImgName")] Consultant consultant, IFormFile file)
         {
-            if (consultant.ImgName == "")
-            {
-                consultant.ImgName = "undefined.jpg";
-                if (ModelState.IsValid)
-                {
-                    _context.Add(consultant);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-
-                }
-            }
 
             if (ModelState.IsValid)
             {
@@ -92,6 +75,18 @@ namespace CLAD.Controllers
             }
             return View(consultant);
         }
+
+        private void UploadFile(IFormFile file, IHostingEnvironment env)
+        {
+
+            var fileName = file.FileName;
+            var path = Path.Combine(env.WebRootPath + "/img/Uploads/" + fileName);
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(fileStream);
+            }
+        }
+
 
         // GET: Consultants/Edit/5
         public async Task<IActionResult> Edit(int? id)

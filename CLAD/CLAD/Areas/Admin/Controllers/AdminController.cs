@@ -58,28 +58,25 @@ namespace CLAD.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,DisplayName,ImgName")] Consultant consultant)
+        public async Task<IActionResult> Create([Bind("Id,UserName,Email,Password,Role")] IdentityUser User)
         {
-            if (consultant.ImgName == "")
-            {
-                consultant.ImgName = "undefined.jpg";
-                if (ModelState.IsValid)
-                {
-                    _context.Add(consultant);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-
-                }
-            }
-
+       
             if (ModelState.IsValid)
             {
-                _context.Add(consultant);
-                await _context.SaveChangesAsync();
+                await _userManager.UpdateAsync(User);
                 return RedirectToAction(nameof(Index));
 
             }
-            return View(consultant);
+            
+
+            if (ModelState.IsValid)
+            {
+                await _userManager.UpdateAsync(User);
+     
+                return RedirectToAction(nameof(Index));
+
+            }
+            return View(User);
         }
 
         // GET: Consultants/Edit/5

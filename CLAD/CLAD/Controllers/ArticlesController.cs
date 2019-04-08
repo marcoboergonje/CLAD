@@ -12,7 +12,6 @@ using System.Security.Claims;
 
 namespace CLAD.Controllers
 {
-    [Authorize(Policy = "RequireAdministratorRole")]
     public class ArticlesController : Controller
     {
         private readonly CLADContext _context;

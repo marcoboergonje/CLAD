@@ -20,8 +20,7 @@
                 {
 
                     <div class="col-3">
-                        <a asp-action="Details" asp-route-id="@item.Id"> <img src="~/img/@Html.DisplayFor(modelitem => item.ImgName)" class="imgconsultant"></a>
-                        <p>@Html.DisplayFor(modelitem => item.DisplayName)</p>
+                        <a asp-action="Details" asp-route-id="@item.Id"> <img src="~/Img/Uploads/@Html.DisplayFor(modelitem => item.ImgName)" class="imgconsultant"></a>
                     </div>
                 }
             </div>
