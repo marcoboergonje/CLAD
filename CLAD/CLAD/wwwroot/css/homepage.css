@@ -99,13 +99,6 @@
     width: 200px;
 }
 
-.profile-pic{
-    width: 25%;
-    height: 225px;  
-    background-color: #f7f7f7;
-    border-right: 2px solid black;
-}
-
 .li-footer {
     height: 20px;
     list-style-type: none;

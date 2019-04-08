@@ -5,18 +5,23 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CLAD.Data;
 using CLAD.Models;
+using CLAD.Data;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace CLAD.Controllers
 {
     public class ImgsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _env;
 
-        public ImgsController(ApplicationDbContext context)
+        public ImgsController(ApplicationDbContext context, IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: Imgs
@@ -54,8 +59,11 @@ namespace CLAD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ImgName")] Img img)
+        public async Task<IActionResult> Create([Bind("Id,ImgName")] Img img, IFormFile file)
         {
+            UploadFile(file, _env);
+            img.ImgName = file.FileName;
+
             if (ModelState.IsValid)
             {
                 _context.Add(img);
@@ -63,6 +71,17 @@ namespace CLAD.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(img);
+        }
+
+        private void UploadFile(IFormFile file, IHostingEnvironment env)
+        {
+
+            var fileName = file.FileName;
+            var path = Path.Combine(env.WebRootPath + "/img/Uploads/" + fileName);
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(fileStream);
+            }
         }
 
         // GET: Imgs/Edit/5

@@ -12,7 +12,6 @@ using System.Security.Claims;
 
 namespace CLAD.Controllers
 {
-    [Authorize(Policy = "RequireAdministratorRole")]
     public class ArticlesController : Controller
     {
         private readonly CLADContext _context;
@@ -65,7 +64,6 @@ namespace CLAD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,AuthorId,Content,IsVisible,Title,PublicaionDate")] Article article)
         {
-            
             article.IsVisible = false;
             //article.AuthorId = await _userManager.GetUserAsync(HttpContext.User);
             article.IsVisible = false;
