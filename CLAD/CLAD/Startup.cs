@@ -14,6 +14,8 @@ using CLAD.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CLAD.Models;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace CLAD
 {
@@ -35,6 +37,10 @@ namespace CLAD
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+    
+
+            services.AddMvc();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

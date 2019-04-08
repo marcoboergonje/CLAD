@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CLAD.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace CLAD.Controllers
 {
@@ -52,6 +54,15 @@ namespace CLAD.Controllers
         {
             return View();
         }
+
+
+        public IActionResult Upload()
+        {
+            return View();
+        }
+
+ 
+
 
         // POST: Consultants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
