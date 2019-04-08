@@ -65,7 +65,7 @@ namespace CLAD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,AuthorId,Content,IsVisible,Title,PublicaionDate")] Article article)
         {
-            article
+            
             article.IsVisible = false;
             //article.AuthorId = await _userManager.GetUserAsync(HttpContext.User);
             article.IsVisible = false;
