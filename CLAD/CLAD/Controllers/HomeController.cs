@@ -23,7 +23,13 @@ namespace CLAD.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Article.ToListAsync());
+            var lastFiveProducts = (from p in _context.Article
+                                    orderby p.Content descending
+                                    select p).Take(3);
+
+            // return View(await _context.Article.ToListAsync());
+            return View(lastFiveProducts);
+
         }
 
         public IActionResult Privacy()

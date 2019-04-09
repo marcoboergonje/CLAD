@@ -42,20 +42,15 @@
             <h2 class="heading-secundiary"> Recent geplaatste artikelen</h2>
         </div>
 
-        @*@for (int i = 0; i < 3; i++)
-        {
-
-
-        }*@
-
         @foreach (var item in Model)
         {
-        <div class="recent-block reveal-onscroll-recentarticle">
-            <h3 class="heading-tertiary" style="float: right; margin-right: 600px;"> Title </h3>
-            <p class="nav-block-text" style="margin-left: 28%; /*margin-top: 30px;*/">
-                @System.Web.HttpUtility.HtmlEncode(item.Content);
-            </p>
-        </div>
+
+            <div class="recent-block reveal-onscroll-recentarticle">
+                <h3 class="heading-tertiary" style="float: right; margin-right: 600px;"> Title </h3>
+                <p class="nav-block-text" style="margin-left: 28%; /*margin-top: 30px;*/">
+                    @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Content))
+                </p>
+            </div>
         }
 
     </section>
