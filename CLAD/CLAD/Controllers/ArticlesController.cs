@@ -12,7 +12,6 @@ using System.Security.Claims;
 
 namespace CLAD.Controllers
 {
-    [Authorize(Policy = "RequireAdministratorRole")]
     public class ArticlesController : Controller
     {
         private readonly CLADContext _context;
@@ -25,9 +24,14 @@ namespace CLAD.Controllers
             _userManager = userManager;
         }
 
-        [Authorize]
-        // GET: Articles
         public async Task<IActionResult> Index()
+        {
+            return View(await _context.Article.ToListAsync());
+        }
+
+        // Admin backend artikelen tabel
+        [Authorize]
+        public async Task<IActionResult> Table()
         {
             return View(await _context.Article.ToListAsync());
         }
@@ -135,7 +139,7 @@ namespace CLAD.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Table));
             }
             return View(article);
         }
@@ -168,7 +172,7 @@ namespace CLAD.Controllers
             var article = await _context.Article.FindAsync(id);
             _context.Article.Remove(article);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Table));
         }
 
         private bool ArticleExists(int id)
