@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CLAD.Models.Consultant>
+﻿    @model IEnumerable<CLAD.Models.Consultant>
 
 @{
     ViewData["Title"] = "Index";
@@ -20,14 +20,11 @@
                 {
 
                     <div class="col-3">
-                        <a asp-action="Details" asp-route-id="@item.Id"> <img src="~/img/@Html.DisplayFor(modelitem => item.ImgName)" class="imgconsultant"></a>
-                        <p>@Html.DisplayFor(modelitem => item.DisplayName)</p>
+                        <a asp-action="Details" asp-route-id="@item.Id"> <img src="~/Img/Uploads/@Html.DisplayFor(modelitem => item.ImgName)" class="imgconsultant"></a>
                     </div>
                 }
             </div>
         </div>
     </div>
     <a asp-action="Create" class="btn btn-outline-primary">Consultant toevoegen</a>
-
-
 </div>

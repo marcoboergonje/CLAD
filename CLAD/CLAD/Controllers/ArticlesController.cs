@@ -12,7 +12,6 @@ using System.Security.Claims;
 
 namespace CLAD.Controllers
 {
-    [Authorize(Policy = "RequireAdministratorRole")]
     public class ArticlesController : Controller
     {
         private readonly CLADContext _context;
@@ -50,12 +49,14 @@ namespace CLAD.Controllers
             return View(article);
         }
 
+        [Authorize]
         // GET: Articles/Create
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize]
         // POST: Articles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -63,6 +64,7 @@ namespace CLAD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,AuthorId,Content,IsVisible,Title,PublicaionDate")] Article article)
         {
+            article.IsVisible = false;
             //article.AuthorId = await _userManager.GetUserAsync(HttpContext.User);
             article.IsVisible = false;
             article.PublicationDate = DateTime.Now;
@@ -82,6 +84,7 @@ namespace CLAD.Controllers
             return View(article);
         }
 
+        [Authorize]
         // GET: Articles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -98,6 +101,8 @@ namespace CLAD.Controllers
             return View(article);
         }
 
+
+        [Authorize]
         // POST: Articles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -134,6 +139,7 @@ namespace CLAD.Controllers
             return View(article);
         }
 
+        [Authorize]
         // GET: Articles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -152,6 +158,7 @@ namespace CLAD.Controllers
             return View(article);
         }
 
+        [Authorize]
         // POST: Articles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

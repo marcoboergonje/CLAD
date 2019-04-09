@@ -1,77 +1,64 @@
-﻿@{
+﻿@model IEnumerable<CLAD.Models.Article>
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 <link rel="stylesheet" href="~/css/homepage.css" />
 <div class="container">
-            <div class="center-text">
-                <h2 class="heading-secundiary">
-                    Welkom bij CeeLearnAndDo
-                </h2>
+    <div class="center-text">
+        <h2 class="heading-secundiary">
+            Welkom bij CeeLearnAndDo
+        </h2>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h3 class="heading-tertiary heading-tertiary-margin">
+                Wie zijn wij
+            </h3>
+            <p class="text-about">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+            </p>
+            <h3 class="heading-tertiary heading-tertiary-margin">
+                Ontmoet het team van CeeLearnAndDo
+            </h3>
+            <p class="text-about">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br /> <br>
+                <a asp-controller="Consultants" asp-action="Index">Het team</a>
+            </p>
+
+        </div>
+        <div class="col-6">
+            <div class="compositie">
+                <img src="~/img/team-b.jpg" class="compositie-foto compositie-foto-1" alt="" />
+                <img src="~/img/gebouw-3.jpg" class="compositie-foto compositie-foto-2" alt="" />
+                <img src="~/img/team-a.jpg" class="compositie-foto compositie-foto-3" alt="" />
             </div>
-            <div class="row">
-                <div class="col-6">
-                    <h3 class="heading-tertiary heading-tertiary-margin">
-                        Wie zijn wij
-                    </h3>
-                    <p class="text-about">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    </p>
-                    <h3 class="heading-tertiary heading-tertiary-margin">
-                        Ontmoet het team van CeeLearnAndDo
-                    </h3>
-                    <p class="text-about">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br /> <br>
-                        <a asp-controller="Consultants" asp-action="Index">Het team</a>
-                    </p>
+        </div>
+    </div>
+    </section>
+    <section class="section-recent-article">
+        <div class="center-text">
+            <h2 class="heading-secundiary"> Recent geplaatste artikelen</h2>
+        </div>
 
-                </div>
-                <div class="col-6">
-                    <div class="compositie">
-                        <img src="~/img/team-b.jpg" class="compositie-foto compositie-foto-1" alt="" />
-                        <img src="~/img/gebouw-3.jpg" class="compositie-foto compositie-foto-2" alt="" />
-                        <img src="~/img/team-a.jpg" class="compositie-foto compositie-foto-3" alt="" />
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="section-recent-article">
-            <div class="center-text">
-                <h2 class="heading-secundiary"> Recent geplaatste artikelen</h2>
-            </div>
-            <div class="recent-block">
-                <div class="profile-pic">
+        @*@for (int i = 0; i < 3; i++)
+        {
 
-                </div>
-                <div class="test">
-                    <h3 class="heading-tertiary center-text"></h3>
-                    <p class="nav-block-text">
 
-                    </p>
-                </div>
-            </div>
-            <div class="recent-block">
-                <div class="profile-pic">
+        }*@
 
-                </div>
-                <div class="test">
-                    <h3 class="heading-tertiary center-text"></h3>
-                    <p class="nav-block-text">
+        @foreach (var item in Model)
+        {
+        <div class="recent-block reveal-onscroll-recentarticle">
+            <h3 class="heading-tertiary" style="float: right; margin-right: 600px;"> Title </h3>
+            <p class="nav-block-text" style="margin-left: 28%; /*margin-top: 30px;*/">
+                @System.Web.HttpUtility.HtmlEncode(item.Content);
+            </p>
+        </div>
+        }
 
-                    </p>
-                </div>
-            </div>
-            <div class="recent-block">
-                <div class="profile-pic">
-
-                </div>
-                <div class="test">
-                    <h3 class="heading-tertiary center-text"></h3>
-                    <p class="nav-block-text">
-                    </p>
-                </div>
-            </div>
-
-        </section>
+    </section>
     </main>
 </div>
 

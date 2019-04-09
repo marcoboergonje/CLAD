@@ -1,24 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using CLAD.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Diagnostics;
 
 namespace CLAD.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly CLADContext _context;
+
+        public HomeController(CLADContext context)
         {
-            return View();
+            _context = context;
         }
 
-        public string Test()
+        public async Task<IActionResult> Index()
         {
-            return "Dit is een git TEST";
-
+            return View(await _context.Article.ToListAsync());
         }
 
         public IActionResult Privacy()
