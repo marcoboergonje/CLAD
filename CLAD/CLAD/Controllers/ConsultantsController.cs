@@ -65,7 +65,8 @@ namespace CLAD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Description,DisplayName,ImgName")] Consultant consultant, IFormFile file)
         {
-
+            UploadFile(file, _env);
+            consultant.ImgName = file.FileName;
             if (ModelState.IsValid)
             {
                 _context.Add(consultant);
