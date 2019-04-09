@@ -3,32 +3,20 @@
 @{
     ViewData["Title"] = "Index";
 }
+
+<link rel="stylesheet" href="~/css/Artikelen.css" />
+
+
 <div class="container">
-    <h1>Index</h1>
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
+    <div class="center-text">
+        <h2 class="heading-secundiary">
+            Artikelen
+        </h2>
+    </div>
+    <div class="Artikel-block">
+        
+    </div>
     <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.AuthorId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Content)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsVisible)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PublicationDate)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
         <tbody>
             @foreach (var item in Model)
             {
@@ -40,18 +28,10 @@
                         @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Content))
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IsVisible)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Title)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.PublicationDate)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     </td>
                 </tr>
             }
