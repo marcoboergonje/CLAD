@@ -21,11 +21,11 @@ namespace CLAD.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var LastThreeArticles = (from p in _context.Article.Where(m => m.IsVisible)
-                                    orderby p.PublicationDate descending
-                                    select p).Take(3);
+                                     orderby p.PublicationDate descending
+                                     select p).Take(3);
 
             // return View(await _context.Article.ToListAsync());
             return View(LastThreeArticles);
