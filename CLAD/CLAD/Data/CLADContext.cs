@@ -17,5 +17,7 @@ namespace CLAD.Models
         public DbSet<CLAD.Models.Consultant> Consultant { get; set; }
 
         public DbSet<CLAD.Models.Article> Article { get; set; }
+
+        public DbSet<CLAD.Models.Question> Question { get; set; }
     }
 }

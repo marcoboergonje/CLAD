@@ -1,30 +1,33 @@
-﻿    @model IEnumerable<CLAD.Models.Consultant>
+﻿@model IEnumerable<CLAD.Models.Consultant>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <div class="container">
-
-
     <h1>Consultant overzicht</h1>
     <br />
+     <input type="text" id="myInput" onkeyup="searchFunction()" placeholder="Zoek een consultant" title="Type een naam in"> <i class="fa fa-search"></i>
     <hr />
     <br />
-    <div id="consultant">
-        <input id="filter" type="text" placeholder="Search..">
-        <div class="container">
-            <div class="row justify-content-start">
+    <div class="container">
+        <div id="myRow" class="row justify-content-start">
+            @foreach (var item in Model)
+            {
+                <li class="col-md-3" style="list-style-type:none;">
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <img src="~/Img/Uploads/@Html.DisplayFor(modelitem => item.ImgName)" class="imgconsultant">
+                        <p style="visibility:hidden;">@Html.DisplayFor(modelItem => item.DisplayName)</p>
+                    </a>
+                </li>
+            }
 
-                @foreach (var item in Model)
-                {
-
-                    <div class="col-3">
-                        <a asp-action="Details" asp-route-id="@item.Id"> <img src="~/Img/Uploads/@Html.DisplayFor(modelitem => item.ImgName)" class="imgconsultant"></a>
-                    </div>
-                }
-            </div>
         </div>
     </div>
     <a asp-action="Create" class="btn btn-outline-primary">Consultant toevoegen</a>
 </div>
+
+
+<script>
+
+</script>
