@@ -1,25 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using CLAD.Data;
 using CLAD.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Identity.UI.V3.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CLAD.Areas.Admin.Controllers
 {
-    public class AdminController : Controller
+    public class RegisterModel : Controller
     {
         private readonly CLADContext _context;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ILogger<Microsoft.AspNetCore.Identity.UI.V3.Pages.Account.Internal.RegisterModel> _logger;
+        private readonly IEmailSender _emailSender;
 
-        public AdminController(CLADContext context, UserManager<IdentityUser> userManager)
+        public RegisterModel(CLADContext context, UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
+            ILogger<Microsoft.AspNetCore.Identity.UI.V3.Pages.Account.Internal.RegisterModel> logger,
+            IEmailSender emailSender)
         {
             _context = context;
             _userManager = userManager;
+      
         }
 
         // GET: /<controller>/
@@ -27,7 +41,6 @@ namespace CLAD.Areas.Admin.Controllers
         {
             return View(_userManager.Users);
         }
-
 
         //// GET: Users/Details/5
         public IActionResult Details(string id)
@@ -51,32 +64,6 @@ namespace CLAD.Areas.Admin.Controllers
         public IActionResult Create()
         {
             return View();
-        }
-
-        // POST: Consultants/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserName,Email,Password,Role")] IdentityUser User)
-        {
-       
-            if (ModelState.IsValid)
-            {
-                await _userManager.UpdateAsync(User);
-                return RedirectToAction(nameof(Index));
-
-            }
-            
-
-            if (ModelState.IsValid)
-            {
-                await _userManager.UpdateAsync(User);
-     
-                return RedirectToAction(nameof(Index));
-
-            }
-            return View(User);
         }
 
         // GET: Consultants/Edit/5
