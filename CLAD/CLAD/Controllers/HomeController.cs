@@ -23,6 +23,7 @@ namespace CLAD.Controllers
 
         public async Task<IActionResult> Index()
         {
+
             return View(await _context.Article.ToListAsync());
         }
 
