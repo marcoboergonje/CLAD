@@ -23,6 +23,9 @@ namespace CLAD.Models
                 if (roleManager.Roles.Count() == 0)
                 {
                     await roleManager.CreateAsync(new IdentityRole("Admin"));
+                    await roleManager.CreateAsync(new IdentityRole("Consultant"));
+                    await roleManager.CreateAsync(new IdentityRole("User"));
+
                 }
             }
 

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CLAD.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CLAD.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private readonly CLADContext _context;
@@ -34,7 +37,7 @@ namespace CLAD.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Email,PhonNumber,Password")] UserViewModel user)
+        public async Task<IActionResult> Create([Bind("Email,PhoneNumber,Password")] UserViewModel user)
         {
 
             if (ModelState.IsValid)
@@ -51,6 +54,38 @@ namespace CLAD.Areas.Admin.Controllers
             return View(user);
 
         }
+
+        // GET: Consultants/Edit/5
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var user = await _userManager.FindByIdAsync(id);
+            UserViewModel user2 = new UserViewModel { Email = user.Email, PhoneNumber = user.PhoneNumber};
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user2);
+        }
+
+        // POST: Consultants/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, [Bind("Email, PhoneNumber")] UserViewModel user)
+        {
+                    var stamp = "jofwiejfw";
+                    IdentityUser user2 = new IdentityUser { UserName = user.Email, Email = user.Email, PhoneNumber = user.PhoneNumber, SecurityStamp = stamp};
+                    var user3 = await _userManager.FindByIdAsync(id);
+                    await _userManager.UpdateAsync(user2);
+                
+                return RedirectToAction(nameof(Index));
+        }
+
 
         //// GET: Users/Details/5
         public IActionResult Details(string id)
