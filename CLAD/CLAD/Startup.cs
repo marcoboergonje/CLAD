@@ -46,6 +46,7 @@ namespace CLAD
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
+                .AddRoles<IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -55,7 +56,7 @@ namespace CLAD
                      policy => policy.RequireRole("Administrator"));
                 options.AddPolicy("RequireConsultantRole",
                      policy => policy.RequireRole("Consultant"));
-             });
+            });
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -120,16 +121,13 @@ namespace CLAD
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                   name: "areas",
+                   template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                 );
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-            });
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                  name: "areas",
-                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                );
             });
         }
     }
