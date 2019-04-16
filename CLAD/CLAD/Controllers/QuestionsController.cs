@@ -29,6 +29,12 @@ namespace CLAD.Views
             return View(await applicationDbContext.ToListAsync());
         }
 
+        public async Task<IActionResult> Table()
+        {
+            var applicationDbContext = _context.Question.Include(q => q.Author);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
         // GET: Questions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -64,8 +70,8 @@ namespace CLAD.Views
 
             question.IsVisible = false;
             question.PublicaionDate = DateTime.Now;
-            var test = await _userManager.GetUserAsync(HttpContext.User);
-            question.AuthorId = test.UserName;
+            //var user = await _userManager.GetUserAsync(HttpContext.User);
+            //question.AuthorId = user.UserName;
 
 
             if (ModelState.IsValid)

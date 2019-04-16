@@ -4,14 +4,16 @@ using CLAD.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CLAD.Migrations
 {
     [DbContext(typeof(CLADContext))]
-    partial class CLADContextModelSnapshot : ModelSnapshot
+    [Migration("20190415134214_isverifiedconsultant")]
+    partial class isverifiedconsultant
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

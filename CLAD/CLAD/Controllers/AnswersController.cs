@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CLAD.Data;
 using CLAD.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CLAD.Controllers
 {
     public class AnswersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public AnswersController(ApplicationDbContext context)
+        public AnswersController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Answers
@@ -57,8 +60,12 @@ namespace CLAD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AuthorId,Content,PublicationDate,QuestionId,Title")] Answer answer)
+        public async Task<IActionResult> Create([Bind("Id,AuthorId,Content,PublicationDate,QuestionId,Title,Question")] Answer answer)
         {
+            answer.PublicationDate = DateTime.Now;
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            answer.AuthorId = user.UserName;
+
             if (ModelState.IsValid)
             {
                 _context.Add(answer);

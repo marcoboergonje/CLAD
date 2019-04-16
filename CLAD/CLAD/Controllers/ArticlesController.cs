@@ -70,10 +70,7 @@ namespace CLAD.Controllers
         public async Task<IActionResult> Create([Bind("Id,AuthorId,Content,IsVisible,Title,PublicaionDate")] Article article)
         {
             article.IsVisible = false;
-            //article.AuthorId = await _userManager.GetUserAsync(HttpContext.User);
-            article.IsVisible = false;
             article.PublicationDate = DateTime.Now;
-            //article.AuthorId = await _userManager.GetUserAsync(HttpContext.User);
 
             Console.WriteLine("USER : " + await _userManager.GetUserAsync(HttpContext.User));
 
