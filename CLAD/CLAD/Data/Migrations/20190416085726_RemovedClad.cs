@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CLAD.Migrations
+namespace CLAD.Data.Migrations
 {
-    public partial class articlescontroller : Migration
+    public partial class RemovedClad : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,11 +18,26 @@ namespace CLAD.Migrations
                     Content = table.Column<string>(nullable: true),
                     IsVisible = table.Column<bool>(nullable: false),
                     Title = table.Column<string>(nullable: true),
-                    PublicaionDate = table.Column<DateTime>(nullable: false)
+                    PublicationDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Article", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Consultant",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(nullable: true),
+                    DisplayName = table.Column<string>(nullable: true),
+                    ImgName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Consultant", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,6 +100,9 @@ namespace CLAD.Migrations
 
             migrationBuilder.DropTable(
                 name: "ArticleTag");
+
+            migrationBuilder.DropTable(
+                name: "Consultant");
 
             migrationBuilder.DropTable(
                 name: "Article");

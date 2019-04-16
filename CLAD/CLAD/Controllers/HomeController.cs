@@ -9,14 +9,15 @@ using CLAD.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Diagnostics;
+using CLAD.Data;
 
 namespace CLAD.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly CLADContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(CLADContext context)
+        public HomeController(ApplicationDbContext context)
         {
             _context = context;
         }

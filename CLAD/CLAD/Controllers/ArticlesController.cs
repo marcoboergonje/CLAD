@@ -9,16 +9,17 @@ using CLAD.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using CLAD.Data;
 
 namespace CLAD.Controllers
 {
     public class ArticlesController : Controller
     {
-        private readonly CLADContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
 
-        public ArticlesController(CLADContext context, UserManager<IdentityUser> userManager)
+        public ArticlesController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;

@@ -20,14 +20,21 @@ namespace CLAD.Models
             }
             using (var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>())
             {
-                if (roleManager.Roles.Count() == 0)
+                if (!await roleManager.RoleExistsAsync("Admin"))
                 {
                     await roleManager.CreateAsync(new IdentityRole("Admin"));
-                    await roleManager.CreateAsync(new IdentityRole("Consultant"));
-                    await roleManager.CreateAsync(new IdentityRole("User"));
-
                 }
+                if (!await roleManager.RoleExistsAsync("Consultant"))
+                {
+                    await roleManager.CreateAsync(new IdentityRole("Consultant"));
+                }
+                if (!await roleManager.RoleExistsAsync("User"))
+                {
+                    await roleManager.CreateAsync(new IdentityRole("User"));
+                }
+
             }
+
 
             using (var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>())
             {
