@@ -9,6 +9,7 @@ using CLAD.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 namespace CLAD.Controllers
 {
@@ -179,5 +180,6 @@ namespace CLAD.Controllers
         {
             return _context.Article.Any(e => e.Id == id);
         }
+
     }
 }
