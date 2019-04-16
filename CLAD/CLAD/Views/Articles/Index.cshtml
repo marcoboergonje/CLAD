@@ -1,4 +1,48 @@
-﻿@model IEnumerable<CLAD.Models.Article>
+﻿<head>
+    <style>
+        .ellipse {
+            max-width: 10px;
+            max-height: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        tr {
+            border-bottom: 10px solid white;
+        }
+
+
+        tr:nth-child(even) {
+            background: #E9E9E9;
+        }
+
+        tr:nth-child(odd) {
+            background: #f7f7f7;
+        }
+
+        .article-info {
+            margin-top: -35px;
+            margin-bottom: 0rem;
+            margin-left: 70%;
+        }
+
+        .img-round{
+            border-radius: 50%;
+        }
+
+        .lees-verder{
+            float: right;
+        }
+       
+        .p{
+            margin: 0px;
+        }
+        
+    </style>
+</head>
+
+@model IEnumerable<CLAD.Models.Article>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,34 +51,33 @@
 <link rel="stylesheet" href="~/css/Artikelen.css" />
 
 
-<div class="container">
-    <div class="center-text">
-        <h2 class="heading-secundiary">
+<div class="container-fluid">
+    <div class="">
+        <h2 class="heading-secundiary text-center">
             Artikelen
         </h2>
     </div>
-    <div class="Artikel-block">
-        
-    </div>
-    <table class="table">
-        <tbody>
+    <div class="container">
+        <table class="table table-borderless">
             @foreach (var item in Model)
             {
                 <tr>
+                    <td><img src="~/img/uploads/omar.jpg" class="img-round" alt="image" height="250" width="250"></td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.AuthorId)
-                    </td>
-                    <td>
-                        @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Content))
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PublicationDate)
+                        <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
+                        <p class="article-info">
+                            @Html.DisplayFor(modelItem => item.AuthorId)
+                            @Html.DisplayFor(modelItem => item.PublicationDate)
+                        </p>
+                        <p class="ellipse">
+
+                            @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Content))
+                            <a href="#" class="lees-verder">Lees verder...</a>
+                        </p>
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
+        </table>
+    </div>
+    
 </div>
