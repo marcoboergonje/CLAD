@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using CLAD.Data;
 using CLAD.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace CLAD.Controllers
 {
@@ -51,7 +51,7 @@ namespace CLAD.Controllers
         // GET: Answers/Create
         public IActionResult Create()
         {
-            ViewData["QuestionId"] = new SelectList(_context.Set<Question>(), "Id", "Id");
+            ViewData["QuestionId"] = new SelectList(_context.Question, "Id", "Id");
             return View();
         }
 
@@ -72,7 +72,7 @@ namespace CLAD.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["QuestionId"] = new SelectList(_context.Set<Question>(), "Id", "Id", answer.QuestionId);
+            ViewData["QuestionId"] = new SelectList(_context.Question, "Id", "Id", answer.QuestionId);
             return View(answer);
         }
 
@@ -89,7 +89,7 @@ namespace CLAD.Controllers
             {
                 return NotFound();
             }
-            ViewData["QuestionId"] = new SelectList(_context.Set<Question>(), "Id", "Id", answer.QuestionId);
+            ViewData["QuestionId"] = new SelectList(_context.Question, "Id", "Id", answer.QuestionId);
             return View(answer);
         }
 
@@ -125,7 +125,7 @@ namespace CLAD.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["QuestionId"] = new SelectList(_context.Set<Question>(), "Id", "Id", answer.QuestionId);
+            ViewData["QuestionId"] = new SelectList(_context.Question, "Id", "Id", answer.QuestionId);
             return View(answer);
         }
 

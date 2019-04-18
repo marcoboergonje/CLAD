@@ -9,14 +9,14 @@ using CLAD.Data;
 using CLAD.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace CLAD.Views
+namespace CLAD.Controllers
 {
     public class QuestionsController : Controller
     {
-        private readonly CLADContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public QuestionsController(CLADContext context, UserManager<IdentityUser> userManager)
+        public QuestionsController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -57,6 +57,7 @@ namespace CLAD.Views
         // GET: Questions/Create
         public IActionResult Create()
         {
+            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -65,14 +66,16 @@ namespace CLAD.Views
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AuthorId,Content,Id,IsVisible,PublicaionDate,Title")] Question question)
+        public async Task<IActionResult> Create([Bind("AnswerId,AuthorId,Content,Id,IsVisible,PublicaionDate,Title")] Question question)
         {
 
             question.IsVisible = false;
             question.PublicaionDate = DateTime.Now;
-            //var user = await _userManager.GetUserAsync(HttpContext.User);
-            //question.AuthorId = user.UserName;
 
+            Console.WriteLine("USER : " + await _userManager.GetUserAsync(HttpContext.User));
+
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            question.AuthorId = user.UserName;
 
             if (ModelState.IsValid)
             {
@@ -80,6 +83,7 @@ namespace CLAD.Views
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id", question.AuthorId);
             return View(question);
         }
 
@@ -96,6 +100,7 @@ namespace CLAD.Views
             {
                 return NotFound();
             }
+            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id", question.AuthorId);
             return View(question);
         }
 
@@ -104,7 +109,7 @@ namespace CLAD.Views
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AuthorId,Content,Id,IsVisible,PublicaionDate,Title")] Question question)
+        public async Task<IActionResult> Edit(int id, [Bind("AnswerId,AuthorId,Content,Id,IsVisible,PublicaionDate,Title")] Question question)
         {
             if (id != question.Id)
             {
@@ -131,6 +136,7 @@ namespace CLAD.Views
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id", question.AuthorId);
             return View(question);
         }
 

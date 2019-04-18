@@ -13,5 +13,7 @@ namespace CLAD.Models
         public string DisplayName { get; set; }
         public string ImgName { get; set; }
         public bool IsVerified { get; set; }
+        public List<Article> Articles { get; set; }
+        public int ArticleId { get; set; }
     }
 }
