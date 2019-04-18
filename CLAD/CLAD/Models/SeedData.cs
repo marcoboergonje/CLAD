@@ -38,17 +38,28 @@ namespace CLAD.Models
 
             using (var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>())
             {
-                var existingUser = await userManager.FindByNameAsync("dennie@gmail.com");
-                if (existingUser == null )
+                var existingAdmin = await userManager.FindByNameAsync("Admin@gmail.com");
+                if (existingAdmin == null)
                 {
-                    var email = "dennie@gmail.com";
-                    var phonenumber = "0987665342";
-                    var password = "Weetikniet1!";
+                    var AdminEmail = "Admin@gmail.com";
+                    var AdminPhonenumber = "0987665342";
+                    var AdminPassword = "Admin1!";
 
-                    IdentityUser user = new IdentityUser { UserName = email, Email = email, PhoneNumber = phonenumber };
-                    await userManager.CreateAsync(user, password);
-                    await userManager.AddToRoleAsync(user, "Admin");
+                    IdentityUser AdminUser = new IdentityUser { UserName = AdminEmail, Email = AdminEmail, PhoneNumber = AdminPhonenumber };
+                    await userManager.CreateAsync(AdminUser, AdminPassword);
+                    await userManager.AddToRoleAsync(AdminUser, "Admin");
                 }
+                var existingConsultant = await userManager.FindByNameAsync("Consultant@gmail.com");
+                if (existingConsultant == null)
+                { 
+                     var ConsultantEmail = "Consultant@gmail.com";
+                     var ConsultantPhonenumber = "0987665342";
+                     var ConsultantPassword = "Consultant1!";
+
+                     IdentityUser ConsultantUser = new IdentityUser { UserName = ConsultantEmail, Email = ConsultantEmail, PhoneNumber = ConsultantPhonenumber };
+                     await userManager.CreateAsync(ConsultantUser, ConsultantPassword);
+                     await userManager.AddToRoleAsync(ConsultantUser, "Consultant");
+               }
             }
         }
     }
