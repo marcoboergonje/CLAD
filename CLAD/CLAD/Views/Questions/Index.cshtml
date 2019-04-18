@@ -1,0 +1,54 @@
+﻿@model IEnumerable<CLAD.Models.Question>
+@{
+    ViewData["Title"] = "Vragen";
+}
+<style>
+    tr {
+        border-bottom: 10px solid white;
+    }
+
+        tr:nth-child(even) {
+            background: #E9E9E9;
+        }
+
+        tr:nth-child(odd) {
+            background: #f7f7f7;
+        }
+
+    .question-info {
+        margin-top: -35px;
+        margin-bottom: 0rem;
+        margin-left: 70%;
+        float:right;
+    }
+
+    .p {
+        margin: 0px;
+    }
+</style>
+<div class="container">
+    <h1 style="margin-bottom:5%;">Frequently asked questions</h1>
+    <table class="table table-borderless">
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                <td>
+                <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+                <p class="question-info">
+                    @Html.DisplayFor(modelItem => item.AuthorId)
+                    @Html.DisplayFor(modelItem => item.PublicaionDate)
+                </p>
+                    <hr />
+                <p >    
+                    @Html.DisplayFor(modelItem => item.Content)
+                    @Html.DisplayFor(modelItem => item.Answers)
+                </p>
+                <a asp-action="Edit" asp-route-id="@item.Id" style="float:right;">Antwoord bekijken</a>
+            </td>
+            </tr>
+            }
+            </tbody>
+        </table>
+</div>
+

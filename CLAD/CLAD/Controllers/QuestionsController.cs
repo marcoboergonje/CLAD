@@ -5,40 +5,37 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CLAD.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
-using System.Text.RegularExpressions;
 using CLAD.Data;
+using CLAD.Models;
+using Microsoft.AspNetCore.Identity;
 
-namespace CLAD.Controllers
+namespace CLAD.Views
 {
-    public class ArticlesController : Controller
+    public class QuestionsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly CLADContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-
-        public ArticlesController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public QuestionsController(CLADContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
+        // GET: Questions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Article.ToListAsync());
+            var applicationDbContext = _context.Question.Include(q => q.Author);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // Admin backend artikelen tabel
-        [Authorize]
         public async Task<IActionResult> Table()
         {
-            return View(await _context.Article.ToListAsync());
+            var applicationDbContext = _context.Question.Include(q => q.Author);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Articles/Details/5
+        // GET: Questions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,53 +43,47 @@ namespace CLAD.Controllers
                 return NotFound();
             }
 
-            var article = await _context.Article
+            var question = await _context.Question
+                .Include(q => q.Author)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (article == null)
+            if (question == null)
             {
                 return NotFound();
             }
 
-            return View(article);
+            return View(question);
         }
 
-        [Authorize]
-        // GET: Articles/Create
-        [Authorize(Roles = "Admin, Consultant")]
+        // GET: Questions/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        [Authorize]
-        [Authorize(Roles = "Admin, Consultant")]
-        // POST: Articles/Create
+        // POST: Questions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AuthorId,Content,IsVisible,Title,PublicaionDate")] Article article)
+        public async Task<IActionResult> Create([Bind("AuthorId,Content,Id,IsVisible,PublicaionDate,Title")] Question question)
         {
-            article.IsVisible = false;
-            article.PublicationDate = DateTime.Now;
 
-            Console.WriteLine("USER : " + await _userManager.GetUserAsync(HttpContext.User));
+            question.IsVisible = false;
+            question.PublicaionDate = DateTime.Now;
+            //var user = await _userManager.GetUserAsync(HttpContext.User);
+            //question.AuthorId = user.UserName;
 
-            var test = await _userManager.GetUserAsync(HttpContext.User);
-            article.AuthorId = test.UserName;
 
             if (ModelState.IsValid)
             {
-                _context.Add(article);
+                _context.Add(question);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(article);
+            return View(question);
         }
 
-        [Authorize]
-        [Authorize(Roles = "Admin, Consultant")]
-        // GET: Articles/Edit/5
+        // GET: Questions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -100,26 +91,22 @@ namespace CLAD.Controllers
                 return NotFound();
             }
 
-            var article = await _context.Article.FindAsync(id);
-            if (article == null)
+            var question = await _context.Question.FindAsync(id);
+            if (question == null)
             {
                 return NotFound();
             }
-            return View(article);
+            return View(question);
         }
 
-
-        [Authorize]
-        [Authorize(Roles = "Admin, Consultant")]
-        // POST: Articles/Edit/5
+        // POST: Questions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AuthorId,Content,IsVisible,Title,PublicationDate")] Article article)
+        public async Task<IActionResult> Edit(int id, [Bind("AuthorId,Content,Id,IsVisible,PublicaionDate,Title")] Question question)
         {
-            article.PublicationDate = DateTime.Now;
-            if (id != article.Id)
+            if (id != question.Id)
             {
                 return NotFound();
             }
@@ -128,12 +115,12 @@ namespace CLAD.Controllers
             {
                 try
                 {
-                    _context.Update(article);
+                    _context.Update(question);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ArticleExists(article.Id))
+                    if (!QuestionExists(question.Id))
                     {
                         return NotFound();
                     }
@@ -142,14 +129,12 @@ namespace CLAD.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Table));
+                return RedirectToAction(nameof(Index));
             }
-            return View(article);
+            return View(question);
         }
 
-        [Authorize]
-        [Authorize(Roles = "Admin, Consultant")]
-        // GET: Articles/Delete/5
+        // GET: Questions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -157,33 +142,31 @@ namespace CLAD.Controllers
                 return NotFound();
             }
 
-            var article = await _context.Article
+            var question = await _context.Question
+                .Include(q => q.Author)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (article == null)
+            if (question == null)
             {
                 return NotFound();
             }
 
-            return View(article);
+            return View(question);
         }
 
-        [Authorize]
-        [Authorize(Roles = "Admin, Consultant")]
-        // POST: Articles/Delete/5
+        // POST: Questions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var article = await _context.Article.FindAsync(id);
-            _context.Article.Remove(article);
+            var question = await _context.Question.FindAsync(id);
+            _context.Question.Remove(question);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Table));
+            return RedirectToAction(nameof(Index));
         }
 
-        private bool ArticleExists(int id)
+        private bool QuestionExists(int id)
         {
-            return _context.Article.Any(e => e.Id == id);
+            return _context.Question.Any(e => e.Id == id);
         }
-
     }
 }
