@@ -1,52 +1,12 @@
-﻿<head>
-    <style>
-        .ellipse {
-            max-width: 10px;
-            max-height: 10px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        tr {
-            border-bottom: 10px solid white;
-        }
-
-
-        tr:nth-child(even) {
-            background: #E9E9E9;
-        }
-
-        tr:nth-child(odd) {
-            background: #f7f7f7;
-        }
-
-        .article-info {
-            margin-top: -35px;
-            margin-bottom: 0rem;
-            margin-left: 70%;
-        }
-
-        .img-round{
-            border-radius: 50%;
-        }
-
-        .lees-verder{
-            float: right;
-        }
-       
-        .p{
-            margin: 0px;
-        }
-        
-    </style>
-</head>
+﻿    <link href="~/css/Artikelen.css" rel="stylesheet" />
 
 @model IEnumerable<CLAD.Models.Article>
+
 
 @{
     ViewData["Title"] = "Index";
 }
+
 
 <link rel="stylesheet" href="~/css/Artikelen.css" />
 
@@ -59,24 +19,47 @@
     </div>
     <div class="container">
         <table class="table table-borderless">
+            @{int x = 0;}
             @foreach (var item in Model)
             {
-                <tr>
-                    <td><img src="~/img/uploads/omar.jpg" class="img-round" alt="image" height="250" width="250"></td>
-                    <td>
-                        <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
-                        <p class="article-info">
-                            @Html.DisplayFor(modelItem => item.AuthorId)
-                            @Html.DisplayFor(modelItem => item.PublicationDate)
-                        </p>
-                        <p class="ellipse">
+                if (x % 2 == 0)
+                    {
+                        <tr>
+                            <td style="width: 150px;"><img src="~/img/uploads/omar.jpg" class="img-round" alt="image" height="150" width="150"></td>
+                            <td>
+                                <h1 class="heading-primary">@Html.DisplayFor(modelItem => item.Title)</h1>
+                                <p class="article-info">
+                                    @Html.DisplayFor(modelItem => item.AuthorId)
+                                    @Html.DisplayFor(modelItem => item.PublicationDate)
+                                </p>
+                                <span class="text-article">
+                                    @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Content))
+                                    <a asp-action="Details" asp-route-id="@item.Id"> Lees verder...</a>
+                                </span>
+                            </td>
+                        </tr>
+                        
+                    }
+                    else
+                    {
+                        <tr>
 
-                            @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Content))
-                            <a href="#" class="lees-verder">Lees verder...</a>
-                        </p>
-                    </td>
-                </tr>
-            }
+                            <td>
+                                <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
+                                <p class="article-info-2">
+                                    @Html.DisplayFor(modelItem => item.AuthorId)
+                                    @Html.DisplayFor(modelItem => item.PublicationDate)
+                                </p>
+                                <span class="text-article-2">
+                                    @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Content))
+                                    <a asp-action="Details" asp-route-id="@item.Id"> Lees verder...</a>
+                                </span>
+                            </td>
+                            <td><img src="~/img/uploads/omar.jpg" class="img-round-2" alt="image" height="150" width="150"></td>
+                        </tr>
+                    }
+                x++;
+                }
         </table>
     </div>
     

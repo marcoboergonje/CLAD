@@ -1,7 +1,72 @@
-﻿.ellipse {
-    max-width: 10px;
-    max-height: 10px;
-    white-space: nowrap;
+﻿.text-article {
+    display: block;
+    width: 710px;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
+    margin-top: 20px;
+}
+
+.text-article-2 {
+    display: block;
+    width: 710px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 20px;
+}
+
+tr {
+    border-bottom: 10px solid white;
+}
+
+
+    tr:nth-child(even) {
+        background: #E9E9E9;
+    }
+
+    tr:nth-child(odd) {
+        background: #f7f7f7;
+    }
+
+.article-info {
+    margin-top: 15px;
+    margin-bottom: 0rem;
+    margin-left: 70%;
+}
+
+.article-info-2 {
+    margin-top: 15px;
+    margin-bottom: 0rem;
+    margin-right: 70%;
+}
+
+text-article-2 {
+    display: block;
+    width: 710px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 20px;
+}
+
+.img-round {
+    border-radius: 50%;
+}
+
+.img-round-2 {
+    border-radius: 50%;
+    float: right;
+}
+
+.lees-verder {
+    float: right;
+}
+
+.heading-primary{
+    float: left;
+}
+
+.p {
+    margin: 0px;
 }

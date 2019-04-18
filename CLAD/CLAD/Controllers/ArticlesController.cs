@@ -30,6 +30,11 @@ namespace CLAD.Controllers
             return View(await _context.Article.ToListAsync());
         }
 
+        public async Task<IActionResult> Articlepage()
+        {
+            return View(await _context.Article.ToListAsync());
+        }
+
         // Admin backend artikelen tabel
         [Authorize]
         public async Task<IActionResult> Table()
