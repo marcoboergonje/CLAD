@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using CLAD.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CLAD.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ConsultantsController : Controller
     {
         private readonly ApplicationDbContext _context;

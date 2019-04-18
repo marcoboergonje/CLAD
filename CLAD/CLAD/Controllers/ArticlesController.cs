@@ -10,16 +10,17 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
+using CLAD.Data;
 
 namespace CLAD.Controllers
 {
     public class ArticlesController : Controller
     {
-        private readonly CLADContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
 
-        public ArticlesController(CLADContext context, UserManager<IdentityUser> userManager)
+        public ArticlesController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -57,12 +58,14 @@ namespace CLAD.Controllers
 
         [Authorize]
         // GET: Articles/Create
+        [Authorize(Roles = "Admin, Consultant")]
         public IActionResult Create()
         {
             return View();
         }
 
         [Authorize]
+        [Authorize(Roles = "Admin, Consultant")]
         // POST: Articles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -91,6 +94,7 @@ namespace CLAD.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = "Admin, Consultant")]
         // GET: Articles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -109,6 +113,7 @@ namespace CLAD.Controllers
 
 
         [Authorize]
+        [Authorize(Roles = "Admin, Consultant")]
         // POST: Articles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -146,6 +151,7 @@ namespace CLAD.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = "Admin, Consultant")]
         // GET: Articles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -165,6 +171,7 @@ namespace CLAD.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = "Admin, Consultant")]
         // POST: Articles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
