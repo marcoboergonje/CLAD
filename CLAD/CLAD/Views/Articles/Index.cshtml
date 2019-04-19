@@ -1,4 +1,4 @@
-﻿    <link href="~/css/Artikelen.css" rel="stylesheet" />
+﻿<link href="~/css/Artikelen.css" rel="stylesheet" />
 
 @model IEnumerable<CLAD.Models.Article>
 
@@ -21,23 +21,23 @@
         <table class="table table-borderless">
             @foreach (var item in Model)
             {
-                
-                        <tr>
-                            <td class="td-img"><img src="@Html.DisplayFor(modelItem => item.Consultant.ImgName)" class="img-round-2" alt="image" height="150" width="150"></td>
-                            <td>
-                                <h1 class="heading-primary">@Html.DisplayFor(modelItem => item.Title)</h1>
-                                <p class="article-info">
-                                    @Html.DisplayFor(modelItem => item.AuthorId)
-                                    @Html.DisplayFor(modelItem => item.PublicationDate)
-                                </p>
-                                <span class="text-article">
-                                    @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Content))
-                                    <a asp-action="Details" asp-route-id="@item.Id"> Lees verder...</a>
-                                </span>
-                            </td>
-                        </tr>
+
+                <tr>
+                    <td class="td-img"><img src="img/uploads/@Html.DisplayFor(modelItem => item.Consultant.ImgName)" class="img-round-2" alt="image" height="150" width="150"></td>
+                    <td>
+                        <h1 class="heading-primary">@Html.DisplayFor(modelItem => item.Title)</h1>
+                        <p class="article-info">
+                            @Html.DisplayFor(modelItem => item.Consultant.DisplayName),
+                            @Html.DisplayFor(modelItem => item.PublicationDate)
+                        </p>
+                        <span class="text-article">
+                            @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Content))
+                            <a asp-action="Details" asp-route-id="@item.Id"> Lees verder...</a>
+                        </span>
+                    </td>
+                </tr>
             }
         </table>
     </div>
-    
+
 </div>

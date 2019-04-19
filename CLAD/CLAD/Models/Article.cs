@@ -7,6 +7,8 @@ namespace CLAD.Models
 {
     public class Article
     {
+        public Consultant Consultant { get; set; }
+        public int ConsultantId { get; set; }
         public int Id { get; set; }
         public string AuthorId { get; set; }
         public string Content { get; set; }

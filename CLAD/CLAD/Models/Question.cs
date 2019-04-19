@@ -9,6 +9,7 @@ namespace CLAD.Models
     public class Question
     {
         public List<Answer> Answers { get; set; }
+        public int AnswerId { get; set; }
         public string AuthorId { get; set; }
         public IdentityUser Author { get; set; }
         public string Content { get; set; }

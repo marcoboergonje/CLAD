@@ -1,0 +1,20 @@
+﻿@model IEnumerable<CLAD.Models.Question>
+@{
+    ViewData["Title"] = "Vragen";
+}
+<div class="container">
+    <h1 style="margin-bottom:5%;">Frequently asked questions</h1>
+    @foreach (var item in Model)
+    {
+    <li style="list-style-type:none;">
+
+        @Html.DisplayFor(modelItem => item.Content)
+        @Html.DisplayFor(modelItem => item.AuthorId)
+        <p style="visibility:hidden;">@Html.DisplayFor(modelItem => item.PublicaionDate)</p>
+        <button class="btn btn-outline-primary">Antwoord bekijken</button>
+        <a asp-controller="Answers" asp-action="Create" asp-route-id="@item.Id">answer</a>
+
+    </li>
+
+    }
+</div>

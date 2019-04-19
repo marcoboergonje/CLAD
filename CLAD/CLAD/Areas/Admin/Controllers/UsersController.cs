@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CLAD.Data;
 using CLAD.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CLAD.Areas.Admin.Controllers
 {
@@ -14,10 +17,10 @@ namespace CLAD.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
-        private readonly CLADContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-
-        public UsersController(CLADContext context, UserManager<IdentityUser> userManager)
+        private readonly UserManager<IdentityUserRole> _userRoleManager;
+        public UsersController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -70,20 +73,30 @@ namespace CLAD.Areas.Admin.Controllers
             }
             return View(user2);
         }
-
         // POST: Consultants/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Email, PhoneNumber")] UserViewModel user)
+        public async Task<IActionResult> Edit(string id, [Bind("Email, PhoneNumber, Role")] UserViewModel user)
         {
-                    var stamp = "jofwiejfw";
-                    IdentityUser user2 = new IdentityUser { UserName = user.Email, Email = user.Email, PhoneNumber = user.PhoneNumber, SecurityStamp = stamp};
-                    var user3 = await _userManager.FindByIdAsync(id);
-                    await _userManager.UpdateAsync(user2);
-                
-                return RedirectToAction(nameof(Index));
+            string[] Roles = new string[3];
+            Roles[0] = "Admin";
+            Roles[1] = "Consultant";
+            Roles[2] = "User";
+            var existingUser = await _userManager.FindByIdAsync(id);
+            existingUser.Email = user.Email;
+            existingUser.UserName = user.Email;
+            existingUser.PhoneNumber = user.PhoneNumber;
+            await _userManager.RemoveFromRolesAsync(existingUser, Roles);
+            if (user.Role == null)
+            {
+                await _userManager.AddToRoleAsync(existingUser, user.Role);
+            }
+            await _userManager.UpdateAsync(existingUser);
+
+
+            return RedirectToAction(nameof(Index));
         }
 
 
