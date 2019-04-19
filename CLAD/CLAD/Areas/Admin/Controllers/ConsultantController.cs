@@ -1,19 +1,23 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using CLAD.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Hosting;
-using System.IO;
 using CLAD.Data;
+using CLAD.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace CLAD.Controllers
+namespace CLAD.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ConsultantsController : Controller
     {
         private static string Fotonaam;
@@ -92,13 +96,13 @@ namespace CLAD.Controllers
         private void UploadFile(IFormFile file, IHostingEnvironment env)
         {
 
-          Random random = new Random();
-          string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
+            Random random = new Random();
+            string RandomString(int length)
+            {
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+                return new string(Enumerable.Repeat(chars, length)
+                  .Select(s => s[random.Next(s.Length)]).ToArray());
+            }
             var fileName = RandomString(15) + ".jpg";
             Fotonaam = fileName;
             var path = Path.Combine(env.WebRootPath + "/img/Uploads/" + fileName);
