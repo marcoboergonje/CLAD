@@ -69,9 +69,6 @@ namespace CLAD.Controllers
 
             Console.WriteLine("USER : " + await _userManager.GetUserAsync(HttpContext.User));
 
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            article.AuthorId = article.Consultant.DisplayName;
-
             if (ModelState.IsValid)
             {
                 _context.Add(article);

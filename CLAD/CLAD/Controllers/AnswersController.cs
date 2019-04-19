@@ -51,6 +51,7 @@ namespace CLAD.Controllers
         // GET: Answers/Create
         public IActionResult Create()
         {
+            ViewData["ConsultantDisplayName"] = new SelectList(_context.Set<Consultant>(), "Id", "DisplayName");
             ViewData["QuestionId"] = new SelectList(_context.Question, "Id", "Id");
             return View();
         }
@@ -60,11 +61,9 @@ namespace CLAD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AuthorId,Content,PublicationDate,QuestionId,Title,Question")] Answer answer)
+        public async Task<IActionResult> Create([Bind("ConsultantId,ConsultantDisplayName,Id,Content,PublicationDate,QuestionId,Title,Question")] Answer answer)
         {
             answer.PublicationDate = DateTime.Now;
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            answer.AuthorId = user.UserName;
 
             if (ModelState.IsValid)
             {
@@ -72,6 +71,7 @@ namespace CLAD.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ConsultantId"] = new SelectList(_context.Set<Consultant>(), "Id", "Id", answer.ConsultantId);
             ViewData["QuestionId"] = new SelectList(_context.Question, "Id", "Id", answer.QuestionId);
             return View(answer);
         }
@@ -89,6 +89,7 @@ namespace CLAD.Controllers
             {
                 return NotFound();
             }
+            ViewData["ConsultantId"] = new SelectList(_context.Set<Consultant>(), "Id", "Id", answer.ConsultantId);
             ViewData["QuestionId"] = new SelectList(_context.Question, "Id", "Id", answer.QuestionId);
             return View(answer);
         }
@@ -98,7 +99,7 @@ namespace CLAD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AuthorId,Content,PublicationDate,QuestionId,Title")] Answer answer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Content,PublicationDate,QuestionId,Title")] Answer answer)
         {
             if (id != answer.Id)
             {

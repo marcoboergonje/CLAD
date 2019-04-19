@@ -11,7 +11,6 @@ namespace CLAD.Models
         public Question Question { get; set; }
         public Consultant Consultant { get; set; }
         public int ConsultantId { get; set; }
-        public string AuthorId { get; set; }
         public string Content { get; set; }
         public DateTime PublicationDate { get; set; }
         public int QuestionId { get; set; }

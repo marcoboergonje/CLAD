@@ -27,7 +27,7 @@
                     <td>
                         <h1 class="heading-primary">@Html.DisplayFor(modelItem => item.Title)</h1>
                         <p class="article-info">
-                            @Html.DisplayFor(modelItem => item.AuthorId)
+                            @Html.DisplayFor(modelItem => item.Consultant.DisplayName),
                             @Html.DisplayFor(modelItem => item.PublicationDate)
                         </p>
                         <span class="text-article">
