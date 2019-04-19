@@ -5,6 +5,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     margin-top: 20px;
+    
 }
 
 .text-article-2 {
@@ -14,6 +15,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     margin-top: 20px;
+    float: right
 }
 
 tr {
@@ -52,6 +54,7 @@ text-article-2 {
 
 .img-round {
     border-radius: 50%;
+    width: 150px;
 }
 
 .img-round-2 {
