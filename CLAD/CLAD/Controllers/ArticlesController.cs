@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CLAD.Data;
 using CLAD.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CLAD.Controllers
 {
     public class ArticlesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public ArticlesController(ApplicationDbContext context)
+        public ArticlesController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Articles
@@ -59,6 +62,16 @@ namespace CLAD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ConsultantId,ConsultantDisplayName,Id,AuthorId,Content,IsVisible,Title,PublicationDate")] Article article)
         {
+
+
+            article.IsVisible = false;
+            article.PublicationDate = DateTime.Now;
+
+            Console.WriteLine("USER : " + await _userManager.GetUserAsync(HttpContext.User));
+
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            article.AuthorId = article.Consultant.DisplayName;
+
             if (ModelState.IsValid)
             {
                 _context.Add(article);

@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CLAD.Data;
 using CLAD.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace CLAD.Controllers
 {
@@ -75,7 +77,7 @@ namespace CLAD.Controllers
             Console.WriteLine("USER : " + await _userManager.GetUserAsync(HttpContext.User));
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            question.AuthorId = user.UserName;
+            //question.AuthorId = user.UserName;
 
             if (ModelState.IsValid)
             {
