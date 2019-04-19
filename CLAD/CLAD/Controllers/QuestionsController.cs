@@ -7,29 +7,37 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CLAD.Data;
 using CLAD.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace CLAD.Controllers
 {
-    public class ArticlesController : Controller
+    public class QuestionsController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public ArticlesController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public QuestionsController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        // GET: Articles
+        // GET: Questions
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Article.Include(a => a.Consultant);
+            var applicationDbContext = _context.Question.Include(q => q.Author);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Articles/Details/5
+        public async Task<IActionResult> Table()
+        {
+            var applicationDbContext = _context.Question.Include(q => q.Author);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: Questions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,49 +45,51 @@ namespace CLAD.Controllers
                 return NotFound();
             }
 
-            var article = await _context.Article
-                .Include(a => a.Consultant)
+            var question = await _context.Question
+                .Include(q => q.Author)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (article == null)
+            if (question == null)
             {
                 return NotFound();
             }
 
-            return View(article);
+            return View(question);
         }
 
-        // GET: Articles/Create
+        // GET: Questions/Create
         public IActionResult Create()
         {
-            ViewData["ConsultantDisplayName"] = new SelectList(_context.Set<Consultant>(), "Id", "DisplayName");
+            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Articles/Create
+        // POST: Questions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ConsultantId,ConsultantDisplayName,Id,AuthorId,Content,IsVisible,Title,PublicationDate")] Article article)
+        public async Task<IActionResult> Create([Bind("AnswerId,AuthorId,Content,Id,IsVisible,PublicaionDate,Title")] Question question)
         {
 
-
-            article.IsVisible = false;
-            article.PublicationDate = DateTime.Now;
+            question.IsVisible = false;
+            question.PublicaionDate = DateTime.Now;
 
             Console.WriteLine("USER : " + await _userManager.GetUserAsync(HttpContext.User));
 
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            //question.AuthorId = user.UserName;
+
             if (ModelState.IsValid)
             {
-                _context.Add(article);
+                _context.Add(question);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsultantId"] = new SelectList(_context.Set<Consultant>(), "Id", "Id", article.ConsultantId);
-            return View(article);
+            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id", question.AuthorId);
+            return View(question);
         }
 
-        // GET: Articles/Edit/5
+        // GET: Questions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,23 +97,23 @@ namespace CLAD.Controllers
                 return NotFound();
             }
 
-            var article = await _context.Article.FindAsync(id);
-            if (article == null)
+            var question = await _context.Question.FindAsync(id);
+            if (question == null)
             {
                 return NotFound();
             }
-            ViewData["ConsultantId"] = new SelectList(_context.Set<Consultant>(), "Id", "Id", article.ConsultantId);
-            return View(article);
+            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id", question.AuthorId);
+            return View(question);
         }
 
-        // POST: Articles/Edit/5
+        // POST: Questions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConsultantId,Id,AuthorId,Content,IsVisible,Title,PublicationDate")] Article article)
+        public async Task<IActionResult> Edit(int id, [Bind("AnswerId,AuthorId,Content,Id,IsVisible,PublicaionDate,Title")] Question question)
         {
-            if (id != article.Id)
+            if (id != question.Id)
             {
                 return NotFound();
             }
@@ -112,12 +122,12 @@ namespace CLAD.Controllers
             {
                 try
                 {
-                    _context.Update(article);
+                    _context.Update(question);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ArticleExists(article.Id))
+                    if (!QuestionExists(question.Id))
                     {
                         return NotFound();
                     }
@@ -128,11 +138,11 @@ namespace CLAD.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsultantId"] = new SelectList(_context.Set<Consultant>(), "Id", "Id", article.ConsultantId);
-            return View(article);
+            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id", question.AuthorId);
+            return View(question);
         }
 
-        // GET: Articles/Delete/5
+        // GET: Questions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -140,31 +150,31 @@ namespace CLAD.Controllers
                 return NotFound();
             }
 
-            var article = await _context.Article
-                .Include(a => a.Consultant)
+            var question = await _context.Question
+                .Include(q => q.Author)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (article == null)
+            if (question == null)
             {
                 return NotFound();
             }
 
-            return View(article);
+            return View(question);
         }
 
-        // POST: Articles/Delete/5
+        // POST: Questions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var article = await _context.Article.FindAsync(id);
-            _context.Article.Remove(article);
+            var question = await _context.Question.FindAsync(id);
+            _context.Question.Remove(question);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ArticleExists(int id)
+        private bool QuestionExists(int id)
         {
-            return _context.Article.Any(e => e.Id == id);
+            return _context.Question.Any(e => e.Id == id);
         }
     }
 }

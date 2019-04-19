@@ -4,10 +4,11 @@
     ViewData["Title"] = "Account registreren";
 }
 
-<h1>@ViewData["Title"]</h1>
+<link href="~/css/Register.css" rel="stylesheet" />
 
+<div class="container">
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6 page-content">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Een nieuw account aanmaken.</h4>
             <hr />
@@ -30,7 +31,11 @@
             <button type="submit" class="btn btn-primary">Registreer</button>
         </form>
     </div>
+    <div class="col-md-6 page-content">
+        <p class="contact">Mocht u niet kunnen registreren dan kunt u ons mailen met het probleem naar fixitgroep@gmail.com.</p>
+    </div>
 </div>
+ </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

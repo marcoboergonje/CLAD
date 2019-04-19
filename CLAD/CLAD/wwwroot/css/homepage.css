@@ -100,9 +100,7 @@
 }
 
 .li-footer {
-    height: 20px;
     list-style-type: none;
-    display: inline;
     padding-right: 1%;
     float: left;
 }

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using CLAD.Data;
-using Microsoft.AspNetCore.Authorization;
 
 namespace CLAD.Controllers
 {
@@ -27,22 +26,17 @@ namespace CLAD.Controllers
         }
 
         // GET: Consultants
-        [Authorize]
-        [Authorize(Roles = "Admin, Consultant")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Consultant.ToListAsync());
         }
-        [Authorize]
-        [Authorize(Roles = "Admin, Consultant")]
+
         public async Task<IActionResult> Table()
         {
             return View(await _context.Consultant.ToListAsync());
         }
 
         // GET: Consultants/Details/5
-        [Authorize]
-        [Authorize(Roles = "Admin, Consultant")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -60,8 +54,6 @@ namespace CLAD.Controllers
             return View(consultant);
         }
 
-        [Authorize]
-        [Authorize(Roles = "Admin, Consultant")]
         // GET: Consultants/Create
         public IActionResult Create()
         {
@@ -71,11 +63,9 @@ namespace CLAD.Controllers
         // POST: Consultants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
-        [Authorize(Roles = "Admin, Consultant")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,DisplayName,ImgName")] Consultant consultant, IFormFile file)
+        public async Task<IActionResult> Create([Bind("Id,Description,DisplayName,ImgName,ArticleId")] Consultant consultant, IFormFile file)
         {
             UploadFile(file, _env);
             consultant.ImgName = Fotonaam;
@@ -110,8 +100,6 @@ namespace CLAD.Controllers
 
 
         // GET: Consultants/Edit/5
-        [Authorize]
-        [Authorize(Roles = "Admin, Consultant")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -132,9 +120,7 @@ namespace CLAD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        [Authorize(Roles = "Admin, Consultant")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,DisplayName,ImgName")] Consultant consultant, IFormFile file)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,DisplayName,ImgName,ArticleId")] Consultant consultant, IFormFile file)
         {
             UploadFile(file, _env);
             consultant.ImgName = Fotonaam;
@@ -168,8 +154,6 @@ namespace CLAD.Controllers
         }
 
         // GET: Consultants/Delete/5
-        [Authorize]
-        [Authorize(Roles = "Admin, Consultant")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -190,8 +174,6 @@ namespace CLAD.Controllers
         // POST: Consultants/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        [Authorize(Roles = "Admin, Consultant")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var consultant = await _context.Consultant.FindAsync(id);

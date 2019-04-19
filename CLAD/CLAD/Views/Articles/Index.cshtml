@@ -1,52 +1,12 @@
-﻿<head>
-    <style>
-        .ellipse {
-            max-width: 10px;
-            max-height: 10px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        tr {
-            border-bottom: 10px solid white;
-        }
-
-
-        tr:nth-child(even) {
-            background: #E9E9E9;
-        }
-
-        tr:nth-child(odd) {
-            background: #f7f7f7;
-        }
-
-        .article-info {
-            margin-top: -35px;
-            margin-bottom: 0rem;
-            margin-left: 70%;
-        }
-
-        .img-round{
-            border-radius: 50%;
-        }
-
-        .lees-verder{
-            float: right;
-        }
-       
-        .p{
-            margin: 0px;
-        }
-        
-    </style>
-</head>
+﻿<link href="~/css/Artikelen.css" rel="stylesheet" />
 
 @model IEnumerable<CLAD.Models.Article>
+
 
 @{
     ViewData["Title"] = "Index";
 }
+
 
 <link rel="stylesheet" href="~/css/Artikelen.css" />
 
@@ -61,23 +21,23 @@
         <table class="table table-borderless">
             @foreach (var item in Model)
             {
+
                 <tr>
-                    <td><img src="~/img/uploads/8VAYXDMPV6.jpg" class="img-round" alt="image" height="250" width="250"></td>
+                    <td class="td-img"><img src="img/uploads/@Html.DisplayFor(modelItem => item.Consultant.ImgName)" class="img-round-2" alt="image" height="150" width="150"></td>
                     <td>
-                        <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
+                        <h1 class="heading-primary">@Html.DisplayFor(modelItem => item.Title)</h1>
                         <p class="article-info">
-                            @Html.DisplayFor(modelItem => item.AuthorId)
+                            @Html.DisplayFor(modelItem => item.Consultant.DisplayName),
                             @Html.DisplayFor(modelItem => item.PublicationDate)
                         </p>
-                        <p class="ellipse">
-
+                        <span class="text-article">
                             @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Content))
-                            <a href="#" class="lees-verder">Lees verder...</a>
-                        </p>
+                            <a asp-action="Details" asp-route-id="@item.Id"> Lees verder...</a>
+                        </span>
                     </td>
                 </tr>
             }
         </table>
     </div>
-    
+
 </div>
